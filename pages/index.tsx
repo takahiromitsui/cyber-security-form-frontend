@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
-import { InputForm } from '../components/InputForm';
+import { Input } from '../components/Input';
 
 const Home: FunctionComponent = () => {
-	return <InputForm label='email'/>;
+	return <Input label='email'/>;
 };
 
 export default Home;

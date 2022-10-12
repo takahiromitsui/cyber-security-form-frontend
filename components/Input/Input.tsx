@@ -5,7 +5,7 @@ interface Props {
 	label: string;
 }
 
-export const InputForm: FunctionComponent<Props> = ({ label }) => {
+export const Input: FunctionComponent<Props> = ({ label }) => {
 	return (
 		<>
 			<InputTypography>{label}</InputTypography>
