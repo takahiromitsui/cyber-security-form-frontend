@@ -5,4 +5,4 @@ export const InputTextField = styled(TextField)`
 	width: 100%;
 `;
 
-export const InputTypography = styled(Typography)``
+export const InputTypography = styled(Typography)``;
