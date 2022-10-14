@@ -1,13 +1,8 @@
-import { Container } from '@mui/system';
 import { FunctionComponent } from 'react';
 import { InputForm } from '../components/InputForm';
 
 const Home: FunctionComponent = () => {
-	return (
-		<Container component="main" maxWidth="xs">
-			<InputForm />
-		</Container>
-	);
+	return <InputForm />;
 };
 
 export default Home;
