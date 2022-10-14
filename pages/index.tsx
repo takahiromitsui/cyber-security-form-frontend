@@ -4,22 +4,26 @@ import { InputForm } from '../components/InputForm';
 
 const Home: FunctionComponent = () => {
 	return (
-	<Container sx={{
-		display: 'flex',
-		justifyContent: 'center',
-	}}>
-		<InputForm inputs={[
-			{
-				label: 'email',
-				type: 'email',
-			},
-			{
-				label: 'password',
-				type: 'password',
-			}
-		]} />
-	</Container>
-	
+		<Container
+			sx={{
+				display: 'flex',
+				justifyContent: 'center',
+			}}
+		>
+			<InputForm
+				inputs={[
+					{
+						label: 'email',
+						type: 'email',
+					},
+					{
+						label: 'password',
+						type: 'password',
+					},
+				]}
+				buttonText='sign up'
+			/>
+		</Container>
 	);
 };
 
