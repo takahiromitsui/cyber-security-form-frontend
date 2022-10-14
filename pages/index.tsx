@@ -8,7 +8,16 @@ const Home: FunctionComponent = () => {
 		display: 'flex',
 		justifyContent: 'center',
 	}}>
-		<InputForm />
+		<InputForm inputs={[
+			{
+				label: 'email',
+				type: 'email',
+			},
+			{
+				label: 'password',
+				type: 'password',
+			}
+		]} />
 	</Container>
 	
 	);

@@ -7,4 +7,10 @@ export const InputFormBox = styled(Box)`
 	background: ${theme.palette.primary.contrastText};
 	padding: 2rem;
 	border-radius: 1rem;
+	display: flex;
+	flex-direction: column;
+`;
+
+export const InputFormItem = styled(Box)`
+	margin-bottom: 20px;
 `;

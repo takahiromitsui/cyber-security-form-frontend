@@ -1,16 +1,19 @@
 import { FunctionComponent } from 'react';
-import { InputTextField, InputTypography } from './styles';
+import { InputTextField } from './styles';
 
-interface Props {
+export interface InputProps {
 	label: string;
+	type: 'text' | 'number' | 'email' | 'password';
 }
 
-export const Input: FunctionComponent<Props> = ({ label }) => {
+export const Input: FunctionComponent<InputProps> = ({ label, type }) => {
 	const capitalizedLabel = label.charAt(0).toUpperCase() + label.slice(1);
 	return (
-		<>
-			<InputTypography>{capitalizedLabel}</InputTypography>
-			<InputTextField size='small' variant='outlined' label={capitalizedLabel} />
-		</>
+		<InputTextField
+			size='small'
+			variant='outlined'
+			label={capitalizedLabel}
+			type={type}
+		/>
 	);
 };
