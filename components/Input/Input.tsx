@@ -11,7 +11,7 @@ interface Props extends InputProps {
 		SetStateAction<
 			| {
 					[key: string]: string;
-			  }[]
+			  }
 			| null
 			| undefined
 		>
@@ -32,17 +32,16 @@ export const Input: FunctionComponent<Props> = ({
 			label={capitalizedLabel}
 			type={type}
 			onChange={e =>
-				updateValue(prev => {
-					if (prev) {
-						const selectedInput = prev.find(input => Object.keys(input)[0] === label);
-						if (selectedInput) {
-							selectedInput[label] = e.target.value;
-							return [...prev]
-						}
-						return [...prev, { [label]: e.target.value }];
-					} else {
-						return [{ [label]: e.target.value }];
-					}
+				updateValue(prevState => {
+					if (!prevState)
+						return {
+							[type]: e.target.value,
+						};
+
+					return {
+						...prevState,
+						[type]: e.target.value,
+					};
 				})
 			}
 		/>
