@@ -1,26 +1,34 @@
 import { Container } from '@mui/system';
-import { FunctionComponent, useState } from 'react';
+import { FunctionComponent, useCallback, useState } from 'react';
 import { InputForm } from '../components/InputForm';
 
 const Home: FunctionComponent = () => {
 	const [inputValue, setInputValue] = useState<{
 		[key: string]: string;
 	} | null>();
-	// const validateInputValue = useCallback(() => {
-	// 	if (!inputValue) return false;
-	// 	console.log(inputValue)
-	// 	const email = inputValue.filter(input => input.key === 'email');
-	// 	const password = inputValue.filter(input => input.key === 'password');
-	// 	console.log(email)
 
-	// 	if (email.length === 0 || password.length === 0) return false;
-	// 	const mailFormat = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/;
-	// 	if (!email[0].email.match(mailFormat)) return false;
-	// 	if (password[0].password.replace(/\s+/g, '').length < 10) return false;
-	// 	return true;
-	// }, [inputValue]);
+	const validateEmail = (email: string) => {
+		const mailFormat =
+			/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		if (!email.match(mailFormat)) return false;
+		return true;
+	};
 
-	// console.log('isValidated', validateInputValue())
+	const validatePassword = (password: string) => {
+		if (password.replace(/\s+/g, '').length < 19) return false;
+		return true;
+	};
+
+	const validateInputValue = useCallback(() => {
+		if (!inputValue) return false;
+		const email = inputValue['email'];
+		const password = inputValue['password'];
+		if (!email || !password) return false;
+		const isValidEmail = validateEmail(email);
+		const validPassword = validatePassword(password);
+		if (!isValidEmail || !validPassword) return false;
+		return true;
+	}, [inputValue]);
 
 	return (
 		<Container
