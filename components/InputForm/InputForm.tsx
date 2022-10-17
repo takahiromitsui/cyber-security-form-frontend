@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-import { Dispatch, FunctionComponent, SetStateAction, useState } from 'react';
+import { Dispatch, FunctionComponent, SetStateAction } from 'react';
 import { Input, InputProps } from '../Input/Input';
 import { InputFormBox, InputFormItem } from './styles';
 
@@ -15,10 +15,15 @@ interface Props {
 			| undefined
 		>
 	>;
+	onClick: () => void;
 }
 
-export const InputForm: FunctionComponent<Props> = ({ inputs, buttonText, setInputValue }) => {
-
+export const InputForm: FunctionComponent<Props> = ({
+	inputs,
+	buttonText,
+	setInputValue,
+	onClick,
+}) => {
 	const inputComponents = inputs.map(input => {
 		return (
 			<InputFormItem key={input.label}>
@@ -34,7 +39,9 @@ export const InputForm: FunctionComponent<Props> = ({ inputs, buttonText, setInp
 	return (
 		<InputFormBox>
 			{inputComponents}
-			<Button variant='contained'>{buttonText}</Button>
+			<Button variant='contained' onClick={onClick}>
+				{buttonText}
+			</Button>
 		</InputFormBox>
 	);
 };

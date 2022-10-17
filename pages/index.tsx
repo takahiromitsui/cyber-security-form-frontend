@@ -1,4 +1,5 @@
 import { Container } from '@mui/system';
+import axios from 'axios';
 import { FunctionComponent, useCallback, useState } from 'react';
 import { InputForm } from '../components/InputForm';
 
@@ -15,7 +16,7 @@ const Home: FunctionComponent = () => {
 	};
 
 	const validatePassword = (password: string) => {
-		if (password.replace(/\s+/g, '').length < 19) return false;
+		if (password.replace(/\s+/g, '').length < 9) return false;
 		return true;
 	};
 
@@ -29,6 +30,21 @@ const Home: FunctionComponent = () => {
 		if (!isValidEmail || !validPassword) return false;
 		return true;
 	}, [inputValue]);
+
+	const sendInputValue = useCallback(() => {
+		if (!validateInputValue()) return;
+		axios({
+			method: 'put',
+			url: 'http://localhost:8080/auth/signup',
+			data: {
+				email: inputValue!['email'],
+				password: inputValue!['password'],
+			},
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+			},
+		});
+	}, [inputValue, validateInputValue]);
 
 	return (
 		<Container
@@ -50,6 +66,7 @@ const Home: FunctionComponent = () => {
 					},
 				]}
 				buttonText='sign up'
+				onClick={() => sendInputValue()}
 			/>
 		</Container>
 	);
