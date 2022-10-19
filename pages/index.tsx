@@ -1,38 +1,19 @@
 import { Container } from '@mui/system';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 import { FunctionComponent, useCallback, useState } from 'react';
 import { InputForm } from '../components/InputForm';
+import { validateInputValue } from '../helpers/auth';
 
 const Home: FunctionComponent = () => {
 	const [inputValue, setInputValue] = useState<{
 		[key: string]: string;
 	} | null>();
 
-	const validateEmail = (email: string) => {
-		const mailFormat =
-			/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-		if (!email.match(mailFormat)) return false;
-		return true;
-	};
-
-	const validatePassword = (password: string) => {
-		if (password.replace(/\s+/g, '').length < 9) return false;
-		return true;
-	};
-
-	const validateInputValue = useCallback(() => {
-		if (!inputValue) return false;
-		const email = inputValue['email'];
-		const password = inputValue['password'];
-		if (!email || !password) return false;
-		const isValidEmail = validateEmail(email);
-		const validPassword = validatePassword(password);
-		if (!isValidEmail || !validPassword) return false;
-		return true;
-	}, [inputValue]);
+	const router = useRouter();
 
 	const sendInputValue = useCallback(() => {
-		if (!validateInputValue()) return;
+		if (!validateInputValue(inputValue)) return;
 		axios({
 			method: 'put',
 			url: 'http://localhost:8080/auth/signup',
@@ -44,7 +25,8 @@ const Home: FunctionComponent = () => {
 				'Content-Type': 'application/x-www-form-urlencoded',
 			},
 		});
-	}, [inputValue, validateInputValue]);
+		router.push('/login');
+	}, [inputValue, router]);
 
 	return (
 		<Container
