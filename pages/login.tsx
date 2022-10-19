@@ -1,14 +1,17 @@
 import { Container } from '@mui/system';
 import axios from 'axios';
-import { FunctionComponent, useCallback, useState } from 'react';
+import { FunctionComponent, useCallback, useContext, useState } from 'react';
 import { InputForm } from '../components/InputForm';
 import { validateInputValue } from '../helpers/auth';
+import AuthContext from '../store/is-auth';
 
 const Login: FunctionComponent = () => {
 	const [inputValue, setInputValue] = useState<{
 		[key: string]: string;
 	} | null>();
 	const [error, setError] = useState<string | null>(null);
+
+	const authCtx = useContext(AuthContext);
 
 	const sendInputValue = useCallback(() => {
 		if (!validateInputValue(inputValue)) return;
@@ -23,11 +26,11 @@ const Login: FunctionComponent = () => {
 				'Content-Type': 'application/x-www-form-urlencoded',
 			},
 		}).then(res => {
-      
+			authCtx.login(res.data.data.token);
     }).catch(err => {
       setError(err.response.data.message);
     });
-	}, [inputValue]);
+	}, [authCtx, inputValue]);
 
 	return (
 		<Container
