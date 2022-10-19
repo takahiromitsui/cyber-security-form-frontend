@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material';
 import { Container } from '@mui/system';
 import axios from 'axios';
 import { useRouter } from 'next/router';
@@ -9,6 +10,7 @@ const Home: FunctionComponent = () => {
 	const [inputValue, setInputValue] = useState<{
 		[key: string]: string;
 	} | null>();
+	const [error, setError] = useState<string | null>(null);
 
 	const router = useRouter();
 
@@ -24,8 +26,13 @@ const Home: FunctionComponent = () => {
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded',
 			},
-		});
-		router.push('/login');
+		})
+			.then(res => {
+				router.push('/login');
+			})
+			.catch(err => {
+				setError(err.response.data.message);
+			});
 	}, [inputValue, router]);
 
 	return (
@@ -33,6 +40,8 @@ const Home: FunctionComponent = () => {
 			sx={{
 				display: 'flex',
 				justifyContent: 'center',
+				flexDirection: 'column',
+				alignItems: 'center',
 			}}
 		>
 			<InputForm
@@ -50,6 +59,7 @@ const Home: FunctionComponent = () => {
 				buttonText='sign up'
 				onClick={() => sendInputValue()}
 			/>
+			{error && <Typography>{error}</Typography>}
 		</Container>
 	);
 };

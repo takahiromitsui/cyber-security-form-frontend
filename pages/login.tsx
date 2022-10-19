@@ -8,6 +8,7 @@ const Login: FunctionComponent = () => {
 	const [inputValue, setInputValue] = useState<{
 		[key: string]: string;
 	} | null>();
+	const [error, setError] = useState<string | null>(null);
 
 	const sendInputValue = useCallback(() => {
 		if (!validateInputValue(inputValue)) return;
@@ -21,7 +22,11 @@ const Login: FunctionComponent = () => {
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded',
 			},
-		});
+		}).then(res => {
+      
+    }).catch(err => {
+      setError(err.response.data.message);
+    });
 	}, [inputValue]);
 
 	return (
