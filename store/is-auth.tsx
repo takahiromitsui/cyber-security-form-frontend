@@ -8,7 +8,10 @@ const AuthContext = createContext({
 });
 
 export const AuthContextProvider = (props: any) => {
-	const initialToken = localStorage.getItem('token');
+	let initialToken;
+	if(typeof window !== 'undefined') {
+		initialToken = localStorage.getItem('token');
+	}
 	const [token, setToken] = useState<string>(initialToken ? initialToken : '');
 	const isLoggedIn = !!token;
 	const login = (token: string) => {
