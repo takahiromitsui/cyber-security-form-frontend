@@ -21,7 +21,6 @@ export function privateRoute(WrappedComponent: any) {
 		static async getInitialProps(ctx: NextPageContext) {
 			// create AuthToken
 			const token = ServerCookie(ctx)[TOKEN_STORAGE_KEY];
-			console.log('token', token);
 			const initialProps = { token };
 			const isValidToken = decodeToken(token);
 			if (!isValidToken) {

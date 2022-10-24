@@ -1,9 +1,10 @@
 import { Container } from '@mui/system';
 import axios from 'axios';
-import { FunctionComponent, useCallback, useContext, useState } from 'react';
+import { useRouter } from 'next/router';
+import { FunctionComponent, useCallback, useState } from 'react';
 import { InputForm } from '../components/InputForm';
 import { validateInputValue } from '../helpers/auth';
-import AuthContext from '../store/is-auth';
+import { storeToken } from '../utils/auth_token';
 
 const Login: FunctionComponent = () => {
 	const [inputValue, setInputValue] = useState<{
@@ -11,7 +12,7 @@ const Login: FunctionComponent = () => {
 	} | null>();
 	const [error, setError] = useState<string | null>(null);
 
-	const authCtx = useContext(AuthContext);
+	const router = useRouter();
 
 	const sendInputValue = useCallback(() => {
 		if (!validateInputValue(inputValue)) return;
@@ -25,12 +26,15 @@ const Login: FunctionComponent = () => {
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded',
 			},
-		}).then(res => {
-			authCtx.login(res.data.data.token);
-    }).catch(err => {
-      setError(err.response.data.message);
-    });
-	}, [authCtx, inputValue]);
+		})
+			.then(res => {
+				storeToken(res.data.data.token);
+				router.push('/dashboard/' + res.data.data.userId);
+			})
+			.catch(err => {
+				setError(err.response.data.message);
+			});
+	}, [inputValue, router]);
 
 	return (
 		<Container
