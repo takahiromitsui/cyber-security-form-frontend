@@ -29,7 +29,7 @@ const Login: FunctionComponent = () => {
 		})
 			.then(res => {
 				storeToken(res.data.data.token);
-				router.push('/dashboard/' + res.data.data.userId);
+				router.push('/dashboard/user');
 			})
 			.catch(err => {
 				setError(err.response.data.message);
