@@ -1,7 +1,7 @@
-import { Button } from '@mui/material';
+import { Button, Link } from '@mui/material';
 import { Dispatch, FunctionComponent, SetStateAction } from 'react';
 import { Input, InputProps } from '../Input/Input';
-import { InputFormBox, InputFormItem } from './styles';
+import { InputFormBox, InputFormItem, LinkBox } from './styles';
 
 interface Props {
 	inputs: Array<InputProps>;
@@ -16,6 +16,8 @@ interface Props {
 		>
 	>;
 	onClick: () => void;
+	linkText?: string;
+	linkHref?: string;
 }
 
 export const InputForm: FunctionComponent<Props> = ({
@@ -23,6 +25,8 @@ export const InputForm: FunctionComponent<Props> = ({
 	buttonText,
 	setInputValue,
 	onClick,
+	linkText,
+	linkHref,
 }) => {
 	const inputComponents = inputs.map(input => {
 		return (
@@ -42,6 +46,11 @@ export const InputForm: FunctionComponent<Props> = ({
 			<Button variant='contained' onClick={onClick}>
 				{buttonText}
 			</Button>
+			{linkText && linkHref && (
+				<LinkBox>
+					<Link href={linkHref}>{linkText}</Link>
+				</LinkBox>
+			)}
 		</InputFormBox>
 	);
 };

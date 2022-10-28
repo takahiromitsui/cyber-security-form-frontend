@@ -14,3 +14,8 @@ export const InputFormBox = styled(Box)`
 export const InputFormItem = styled(Box)`
 	margin-bottom: 20px;
 `;
+
+export const LinkBox = styled(Box)`
+	text-align: center;
+	margin: 1rem 0;
+`;
