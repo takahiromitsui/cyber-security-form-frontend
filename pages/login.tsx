@@ -57,6 +57,8 @@ const Login: FunctionComponent = () => {
 				]}
 				buttonText='login'
 				onClick={() => sendInputValue()}
+				linkHref='/'
+				linkText="Sign up?"
 			/>
 		</Container>
 	);

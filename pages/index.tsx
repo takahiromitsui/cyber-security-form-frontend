@@ -58,6 +58,8 @@ const Home: FunctionComponent = () => {
 				]}
 				buttonText='sign up'
 				onClick={() => sendInputValue()}
+				linkHref='/login'
+				linkText='Already have an account? Log in'
 			/>
 			{error && <Typography>{error}</Typography>}
 		</Container>
