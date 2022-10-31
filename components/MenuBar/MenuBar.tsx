@@ -1,6 +1,7 @@
 import { AppBar, Button, Toolbar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { FunctionComponent } from 'react';
+import { logout, TOKEN_STORAGE_KEY } from '../../utils/auth_token';
 import { NextLinkComposed } from '../Link';
 
 export interface NavItemProps {
@@ -24,7 +25,7 @@ export const MenuBar: FunctionComponent<Props> = ({ navItems }) => {
 						My App
 					</Typography>
 					<Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-						{navItems &&
+						{navItems ? (
 							navItems.map((item, index) => {
 								return (
 									<Button
@@ -35,10 +36,15 @@ export const MenuBar: FunctionComponent<Props> = ({ navItems }) => {
 										}}
 										color='inherit'
 									>
-										{item.linkText}
+										<Typography>{item.linkText}</Typography>
 									</Button>
 								);
-							})}
+							})
+						) : (
+							<Button color='inherit' onClick={() => logout(TOKEN_STORAGE_KEY)}>
+								<Typography>Logout</Typography>
+							</Button>
+						)}
 					</Box>
 				</Toolbar>
 			</AppBar>
