@@ -29,7 +29,7 @@ export const MenuBar: FunctionComponent<Props> = ({ navItems }) => {
 							navItems.map((item, index) => {
 								return (
 									<Button
-										key={index}
+										key={`menubar-button-${index}`}
 										component={NextLinkComposed}
 										to={{
 											pathname: item.linkHref,
