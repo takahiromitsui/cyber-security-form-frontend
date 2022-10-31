@@ -13,12 +13,16 @@ export interface JwtToken {
 
 export const decodeToken = (token?: string) => {
 	if (!token) return false;
-	const { id } = jwt.verify(
-		token,
-		process.env.JWT_SECRET as string
-	) as JwtToken;
-	if (!id) return false;
-	return true;
+	try {
+		const { id } = jwt.verify(
+			token,
+			process.env.JWT_SECRET as string
+		) as JwtToken;
+		if (!id) return false;
+		return true;
+	} catch {
+		return false;
+	}
 };
 
 export const storeToken = (token: string) => {

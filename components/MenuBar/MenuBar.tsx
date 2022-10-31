@@ -4,12 +4,12 @@ import { FunctionComponent } from 'react';
 import { NextLinkComposed } from '../Link';
 
 export interface NavItemProps {
-	linkText?: string;
-	linkHref?: string;
+	linkText: string;
+	linkHref: string;
 }
 
 interface Props {
-	navItems: Array<NavItemProps>;
+	navItems?: Array<NavItemProps>;
 }
 
 export const MenuBar: FunctionComponent<Props> = ({ navItems }) => {
@@ -24,8 +24,8 @@ export const MenuBar: FunctionComponent<Props> = ({ navItems }) => {
 						My App
 					</Typography>
 					<Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-						{navItems.map((item, index) => {
-							if (item.linkText && item.linkHref) {
+						{navItems &&
+							navItems.map((item, index) => {
 								return (
 									<Button
 										key={index}
@@ -38,8 +38,7 @@ export const MenuBar: FunctionComponent<Props> = ({ navItems }) => {
 										{item.linkText}
 									</Button>
 								);
-							}
-						})}
+							})}
 					</Box>
 				</Toolbar>
 			</AppBar>
