@@ -1,4 +1,4 @@
-import { Button, Container, Typography } from '@mui/material';
+import { Box, Button, Container, Typography } from '@mui/material';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
@@ -50,18 +50,25 @@ const User: FunctionComponent = () => {
 						display: 'flex',
 						alignItems: 'center',
 						flexDirection: 'column',
+						marginTop: '10%',
 					}}
 				>
-					<Typography>User Credential</Typography>
-					{textItems.map((item, index) => {
-						return (
-							<TextItem
-								key={`user-textItem-${index}`}
-								label={item.label}
-								item={item.item}
-							/>
-						);
-					})}
+					<Typography variant='h4'>User Credential</Typography>
+					<Box
+						sx={{
+							marginTop: '10%',
+						}}
+					>
+						{textItems.map((item, index) => {
+							return (
+								<TextItem
+									key={`user-textItem-${index}`}
+									label={item.label}
+									item={item.item}
+								/>
+							);
+						})}
+					</Box>
 					<Button onClick={() => logout(TOKEN_STORAGE_KEY)}>
 						<Typography>Logout</Typography>
 					</Button>
