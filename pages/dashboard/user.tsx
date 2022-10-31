@@ -1,10 +1,10 @@
-import { Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 import { FunctionComponent, useState } from 'react';
 import { privateRoute } from '../../hoc/privateRoute';
-import { TOKEN_STORAGE_KEY } from '../../utils/auth_token';
+import { logout, TOKEN_STORAGE_KEY } from '../../utils/auth_token';
 
 const User: FunctionComponent = () => {
 	const [isError, setIsError] = useState(false);
@@ -37,6 +37,9 @@ const User: FunctionComponent = () => {
 					<Typography>User Credential</Typography>
 					<Typography>{userData?.email}</Typography>
 					<Typography>{userData?.id}</Typography>
+					<Button onClick={() => logout(TOKEN_STORAGE_KEY)}>
+						<Typography>Logout</Typography>
+					</Button>
 				</>
 			)}
 		</>

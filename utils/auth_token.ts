@@ -41,3 +41,8 @@ export const redirectToLogin = (server?: ServerResponse) => {
 		Router.push(login);
 	}
 };
+
+export const logout = (token: string) => {
+	Cookie.remove(token);
+	redirectToLogin();
+};
