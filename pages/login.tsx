@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import { Container } from '@mui/system';
 import axios from 'axios';
 import { useRouter } from 'next/router';
@@ -32,7 +33,7 @@ const Login: FunctionComponent = () => {
 				router.push('/dashboard/user');
 			})
 			.catch(err => {
-				setError(err.response.data.message);
+				// setError(err.response.data.message);
 			});
 	}, [inputValue, router]);
 
@@ -43,23 +44,29 @@ const Login: FunctionComponent = () => {
 				justifyContent: 'center',
 			}}
 		>
-			<InputForm
-				setInputValue={setInputValue}
-				inputs={[
-					{
-						label: 'email',
-						type: 'email',
-					},
-					{
-						label: 'password',
-						type: 'password',
-					},
-				]}
-				buttonText='login'
-				onClick={() => sendInputValue()}
-				linkHref='/'
-				linkText="Sign up?"
-			/>
+			<Box
+				sx={{
+					marginTop: '10%',
+				}}
+			>
+				<InputForm
+					setInputValue={setInputValue}
+					inputs={[
+						{
+							label: 'email',
+							type: 'email',
+						},
+						{
+							label: 'password',
+							type: 'password',
+						},
+					]}
+					buttonText='login'
+					onClick={() => sendInputValue()}
+					linkHref='/'
+					linkText='Sign up?'
+				/>
+			</Box>
 		</Container>
 	);
 };

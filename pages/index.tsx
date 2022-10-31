@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { Container } from '@mui/system';
 import axios from 'axios';
 import { useRouter } from 'next/router';
@@ -31,7 +31,8 @@ const Home: FunctionComponent = () => {
 				router.push('/login');
 			})
 			.catch(err => {
-				setError(err.response.data.message);
+				// console.log(err);
+				// setError(err.response.data.message);
 			});
 	}, [inputValue, router]);
 
@@ -44,23 +45,29 @@ const Home: FunctionComponent = () => {
 				alignItems: 'center',
 			}}
 		>
-			<InputForm
-				setInputValue={setInputValue}
-				inputs={[
-					{
-						label: 'email',
-						type: 'email',
-					},
-					{
-						label: 'password',
-						type: 'password',
-					},
-				]}
-				buttonText='sign up'
-				onClick={() => sendInputValue()}
-				linkHref='/login'
-				linkText='Already have an account? Log in'
-			/>
+			<Box
+				sx={{
+					marginTop: '10%',
+				}}
+			>
+				<InputForm
+					setInputValue={setInputValue}
+					inputs={[
+						{
+							label: 'email',
+							type: 'email',
+						},
+						{
+							label: 'password',
+							type: 'password',
+						},
+					]}
+					buttonText='sign up'
+					onClick={() => sendInputValue()}
+					linkHref='/login'
+					linkText='Already have an account? Log in'
+				/>
+			</Box>
 			{error && <Typography>{error}</Typography>}
 		</Container>
 	);
