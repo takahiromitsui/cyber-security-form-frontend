@@ -1,6 +1,7 @@
-import { Button, Link } from '@mui/material';
+import { Button } from '@mui/material';
 import { Dispatch, FunctionComponent, SetStateAction } from 'react';
 import { Input, InputProps } from '../Input/Input';
+import { NextLinkComposed } from '../Link';
 import { InputFormBox, InputFormItem, LinkBox } from './styles';
 
 interface Props {
@@ -48,7 +49,14 @@ export const InputForm: FunctionComponent<Props> = ({
 			</Button>
 			{linkText && linkHref && (
 				<LinkBox>
-					<Link href={linkHref}>{linkText}</Link>
+					<Button
+						component={NextLinkComposed}
+						to={{
+							pathname: linkHref,
+						}}
+					>
+						{linkText}
+					</Button>
 				</LinkBox>
 			)}
 		</InputFormBox>
