@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { FunctionComponent, useCallback, useState } from 'react';
 import { InputForm } from '../components/InputForm';
 import { validateInputValue } from '../helpers/auth';
-import { storeToken } from '../utils/auth_token';
+import { setURL, storeToken } from '../utils/auth_token';
 
 const Login: FunctionComponent = () => {
 	const [inputValue, setInputValue] = useState<{
@@ -19,7 +19,7 @@ const Login: FunctionComponent = () => {
 		if (!validateInputValue(inputValue)) return;
 		axios({
 			method: 'post',
-			url: 'http://localhost:8080/auth/login',
+			url: setURL('/auth/login'),
 			data: {
 				email: inputValue!['email'],
 				password: inputValue!['password'],

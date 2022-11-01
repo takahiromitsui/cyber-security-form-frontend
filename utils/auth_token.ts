@@ -2,8 +2,12 @@ import { ServerResponse } from 'http';
 import Cookie from 'js-cookie';
 import jwt from 'jsonwebtoken';
 import Router from 'next/router';
-// import * as dotenv from 'dotenv';
-// dotenv.config();
+
+const BASE_URL = process.env.BASE_URL;
+
+export const setURL = (query: string) => {
+	return `${BASE_URL}${query}`;
+};
 
 export const TOKEN_STORAGE_KEY = 'jwt';
 

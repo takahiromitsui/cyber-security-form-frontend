@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { FunctionComponent, useCallback, useState } from 'react';
 import { InputForm } from '../components/InputForm';
 import { validateInputValue } from '../helpers/auth';
+import { setURL } from '../utils/auth_token';
 
 const Home: FunctionComponent = () => {
 	const [inputValue, setInputValue] = useState<{
@@ -19,7 +20,7 @@ const Home: FunctionComponent = () => {
 		if (typeof validation === 'string') return setError(validation);
 		axios({
 			method: 'put',
-			url: 'http://localhost:8080/auth/signup',
+			url: setURL('/auth/signup'),
 			data: {
 				email: inputValue!['email'],
 				password: inputValue!['password'],

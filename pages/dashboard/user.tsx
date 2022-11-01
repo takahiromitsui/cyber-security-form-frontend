@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { FunctionComponent, useState } from 'react';
 import { TextItem } from '../../components/TextItem';
 import { privateRoute } from '../../hoc/privateRoute';
-import { logout, TOKEN_STORAGE_KEY } from '../../utils/auth_token';
+import { logout, setURL, TOKEN_STORAGE_KEY } from '../../utils/auth_token';
 
 const User: FunctionComponent = () => {
 	const [isError, setIsError] = useState(false);
@@ -16,7 +16,7 @@ const User: FunctionComponent = () => {
 		const token = Cookies.get(TOKEN_STORAGE_KEY);
 		axios({
 			method: 'get',
-			url: 'http://localhost:8080/user/info',
+			url: setURL('/user/info'),
 			headers: {
 				Authorization: 'Bearer ' + token,
 			},
