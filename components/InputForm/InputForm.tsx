@@ -2,7 +2,13 @@ import { Button } from '@mui/material';
 import { Dispatch, FunctionComponent, SetStateAction } from 'react';
 import { Input, InputProps } from '../Input/Input';
 import { NextLinkComposed } from '../Link';
-import { InputFormBox, InputFormItem, LinkBox } from './styles';
+import {
+	ErrorBox,
+	ErrorTypography,
+	InputFormBox,
+	InputFormItem,
+	LinkBox,
+} from './styles';
 
 interface Props {
 	inputs: Array<InputProps>;
@@ -17,6 +23,7 @@ interface Props {
 		>
 	>;
 	onClick: () => void;
+	error: string | null;
 	linkText?: string;
 	linkHref?: string;
 }
@@ -26,6 +33,7 @@ export const InputForm: FunctionComponent<Props> = ({
 	buttonText,
 	setInputValue,
 	onClick,
+	error,
 	linkText,
 	linkHref,
 }) => {
@@ -43,6 +51,9 @@ export const InputForm: FunctionComponent<Props> = ({
 
 	return (
 		<InputFormBox>
+			<ErrorBox>
+				{error && <ErrorTypography variant='h6'>{error}</ErrorTypography>}
+			</ErrorBox>
 			{inputComponents}
 			<Button variant='contained' onClick={onClick}>
 				{buttonText}
