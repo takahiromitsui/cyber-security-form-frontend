@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import { Container } from '@mui/system';
 import axios from 'axios';
 import { useRouter } from 'next/router';
@@ -15,7 +15,8 @@ const Home: FunctionComponent = () => {
 	const router = useRouter();
 
 	const sendInputValue = useCallback(() => {
-		if (!validateInputValue(inputValue)) return;
+		const validation = validateInputValue(inputValue);
+		if (typeof validation === 'string') return setError(validation);
 		axios({
 			method: 'put',
 			url: 'http://localhost:8080/auth/signup',
@@ -28,11 +29,11 @@ const Home: FunctionComponent = () => {
 			},
 		})
 			.then(res => {
+				setError(null);
 				router.push('/login');
 			})
 			.catch(err => {
-				// console.log(err);
-				// setError(err.response.data.message);
+				setError(err.response.data.message);
 			});
 	}, [inputValue, router]);
 
@@ -64,11 +65,11 @@ const Home: FunctionComponent = () => {
 					]}
 					buttonText='sign up'
 					onClick={() => sendInputValue()}
+					error={error}
 					linkHref='/login'
 					linkText='Already have an account? Log in'
 				/>
 			</Box>
-			{error && <Typography>{error}</Typography>}
 		</Container>
 	);
 };

@@ -17,13 +17,14 @@ export const validateInputValue = (
 		  }
 		| null
 		| undefined
-) => {
-	if (!inputValue) return false;
+): string | boolean => {
+	if (!inputValue) return 'Invalid input';
 	const email = inputValue['email'];
 	const password = inputValue['password'];
-	if (!email || !password) return false;
+	if (!email || !password) return 'Invalid input';
 	const isValidEmail = validateEmail(email);
 	const validPassword = validatePassword(password);
-	if (!isValidEmail || !validPassword) return false;
+	if (!isValidEmail) return 'Invalid email';
+	if (!validPassword) return 'Password should be 10 letters at least';
 	return true;
 };

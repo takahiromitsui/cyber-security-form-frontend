@@ -29,11 +29,12 @@ const Login: FunctionComponent = () => {
 			},
 		})
 			.then(res => {
+				setError(null);
 				storeToken(res.data.data.token);
 				router.push('/dashboard/user');
 			})
 			.catch(err => {
-				// setError(err.response.data.message);
+				setError(err.response.data.message);
 			});
 	}, [inputValue, router]);
 
@@ -63,6 +64,7 @@ const Login: FunctionComponent = () => {
 					]}
 					buttonText='login'
 					onClick={() => sendInputValue()}
+					error={error}
 					linkHref='/'
 					linkText='Sign up?'
 				/>
