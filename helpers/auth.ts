@@ -5,11 +5,6 @@ const validateEmail = (email: string) => {
 	return true;
 };
 
-const validatePassword = (password: string) => {
-	if (password.replace(/\s+/g, '').length < 9) return false;
-	return true;
-};
-
 export const validateInputValue = (
 	inputValue:
 		| {
@@ -18,13 +13,11 @@ export const validateInputValue = (
 		| null
 		| undefined
 ): string | boolean => {
-	if (!inputValue) return 'Invalid input';
+	if (!inputValue) return 'Please fill the form';
 	const email = inputValue['email'];
 	const password = inputValue['password'];
-	if (!email || !password) return 'Invalid input';
+	if (!email || !password) return 'Please fill the form';
 	const isValidEmail = validateEmail(email);
-	const validPassword = validatePassword(password);
 	if (!isValidEmail) return 'Invalid email';
-	if (!validPassword) return 'Password should be 10 letters at least';
 	return true;
 };

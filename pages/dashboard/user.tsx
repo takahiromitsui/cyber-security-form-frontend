@@ -22,6 +22,7 @@ const User: FunctionComponent = () => {
 			},
 		})
 			.then(res => {
+				console.log('called')
 				setIsError(false);
 				setUserData(res.data.data);
 			})
@@ -37,7 +38,7 @@ const User: FunctionComponent = () => {
 		},
 		{
 			label: 'Date of creation',
-			item: userData?.id,
+			item: userData?.createdAt,
 		},
 	];
 
