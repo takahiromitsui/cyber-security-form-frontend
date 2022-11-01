@@ -17,8 +17,9 @@
     "dotenv": "^16.0.3",
     "js-cookie": "^3.0.1",
     "jsonwebtoken": "^8.5.1",
-    "next-cookies": "^2.0.3",
     "next": "12.1.0",
+    "next-cookies": "^2.0.3",
+    "npm-force-resolutions": "^0.0.10",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "styled-components": "^5.3.6"
@@ -37,5 +38,8 @@
   },
   "files": [
     "./styled.d.ts"
-  ]
+  ],
+  "resolutions": {
+    "@types/react": "17.0.2"
+  }
 }

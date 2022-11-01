@@ -1,5 +1,4 @@
-import { Typography } from '@mui/material';
-import { Container } from '@mui/system';
+import { Container, Typography } from '@mui/material';
 import { FunctionComponent } from 'react';
 
 interface Props {
@@ -10,11 +9,11 @@ interface Props {
 export const TextItem: FunctionComponent<Props> = ({ label, item }) => {
 	return (
 		<Container
-      disableGutters={true}
+			disableGutters={true}
 			sx={{
 				display: 'flex',
 				flexDirection: 'column',
-        marginBottom: '1rem',
+				marginBottom: '1rem',
 			}}
 		>
 			<Typography

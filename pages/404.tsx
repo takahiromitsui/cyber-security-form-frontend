@@ -1,5 +1,4 @@
-import { Button, Typography } from '@mui/material';
-import { Container } from '@mui/system';
+import { Button, Container, Typography } from '@mui/material';
 import { FunctionComponent } from 'react';
 import { NextLinkComposed } from '../components/Link';
 

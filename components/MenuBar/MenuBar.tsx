@@ -1,5 +1,4 @@
-import { AppBar, Button, Toolbar, Typography } from '@mui/material';
-import { Box } from '@mui/system';
+import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
 import { FunctionComponent } from 'react';
 import { logout, TOKEN_STORAGE_KEY } from '../../utils/auth_token';
 import { NextLinkComposed } from '../Link';
