@@ -2,7 +2,7 @@ import { Box, Button, Container, Typography } from '@mui/material';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
-import { FunctionComponent, useState } from 'react';
+import { FunctionComponent, useEffect, useState } from 'react';
 import { TextItem } from '../../components/TextItem';
 import { privateRoute } from '../../hoc/privateRoute';
 import { logout, setURL, TOKEN_STORAGE_KEY } from '../../utils/auth_token';
@@ -12,7 +12,7 @@ const User: FunctionComponent = () => {
 	const [userData, setUserData] = useState<null | any>(null);
 	const router = useRouter();
 
-	if (typeof window !== 'undefined') {
+	useEffect(() => {
 		const token = Cookies.get(TOKEN_STORAGE_KEY);
 		axios({
 			method: 'get',
@@ -22,7 +22,7 @@ const User: FunctionComponent = () => {
 			},
 		})
 			.then(res => {
-				console.log('called')
+				console.log('called');
 				setIsError(false);
 				setUserData(res.data.data);
 			})
@@ -30,7 +30,8 @@ const User: FunctionComponent = () => {
 				setIsError(true);
 				router.push('/login');
 			});
-	}
+	}, [router]);
+	
 	const textItems = [
 		{
 			label: 'Email',
