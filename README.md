@@ -1,10 +1,10 @@
 # Secure Login Form
 
-[Secure Login Form](https://cyber-security-form-frontend.vercel.app/) is a simple Login form to demonstrate security implmentation for the Login form. This frontend page connects to [Secure Login Form API](https://github.com/takahiromitsui/login_form_cyber_security).
+[Secure Login Form](https://cyber-security-form-frontend.vercel.app/) is a simple Login form to demonstrate security implementation for the Login form. This frontend page connects to [Secure Login Form API](https://github.com/takahiromitsui/login_form_cyber_security).
 
 ## Security
 
-- [JWT token](https://www.npmjs.com/package/jsonwebtoken) implmentation
+- [JWT token](https://www.npmjs.com/package/jsonwebtoken) implementation
 - Route protection(ref: hoc/privateRoute.tsx and utils/auth_token.ts)
 - Input validation(ref: helpers/auth.ts)
 - Monitor vulnerability by [sonarCloud](https://sonarcloud.io)
